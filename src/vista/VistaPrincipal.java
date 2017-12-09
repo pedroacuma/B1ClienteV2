@@ -17,7 +17,6 @@ import javax.swing.UIManager;
 import controlador.ControladorVistaSeries;
 
 import java.awt.BorderLayout;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -27,10 +26,9 @@ import java.awt.event.KeyEvent;
 public class VistaPrincipal extends JPanel {
     public VistaPrincipal() {
         super(new GridLayout(1, 1));
-
         
         JTabbedPane tabbedPane = new JTabbedPane();
-     
+        
         VistaSeries vs = new VistaSeries();
         ControladorVistaSeries cvs = new ControladorVistaSeries(vs);
         vs.controlador(cvs);
@@ -105,7 +103,7 @@ public class VistaPrincipal extends JPanel {
         });
     }
     
-	private static Image getIconImage() {
+	public static Image getIconImage() {
 		   Image retValue = Toolkit.getDefaultToolkit().
 		         getImage(ClassLoader.getSystemResource("Fuentes/DC.png"));
 		   return retValue;

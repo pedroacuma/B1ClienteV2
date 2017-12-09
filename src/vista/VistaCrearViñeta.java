@@ -25,6 +25,7 @@ public class VistaCrearViñeta extends JFrame {
 	
 	public  VistaCrearViñeta() {
 		frmCrearViñeta = new JFrame();
+		frmCrearViñeta.setIconImage(VistaPrincipal.getIconImage());
 		frmCrearViñeta.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmCrearViñeta.setTitle("Crear Viñeta");
 		//frmCrearSerie.setBounds(100, 100, 450, 300);

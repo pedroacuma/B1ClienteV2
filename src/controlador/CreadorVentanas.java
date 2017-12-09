@@ -8,12 +8,14 @@ import vista.VistaBorrarSerie;
 import vista.VistaCrearCategoria;
 import vista.VistaCrearSerie;
 import vista.VistaCrearViñeta;
+import vista.VistaPrincipal;
 import vista.VistaSeries;
 
 public class CreadorVentanas {
 
 	public static void crearVentanaCC(VistaSeries vs) {
 		JFrame ventana = new JFrame ("Crear Categoría");
+		ventana.setIconImage(VistaPrincipal.getIconImage());
 		ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		VistaCrearCategoria vcc = new VistaCrearCategoria();
@@ -30,6 +32,7 @@ public class CreadorVentanas {
 	
 	public static void crearVentanaBC(VistaSeries vs) {
 		JFrame ventana = new JFrame ("Borrar Categoria");
+		ventana.setIconImage(VistaPrincipal.getIconImage());
 		ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		
 		VistaBorrarCategoria vbc = new VistaBorrarCategoria();

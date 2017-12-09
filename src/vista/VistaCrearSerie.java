@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 
+import modelo.Categoria;
+
 
 public class VistaCrearSerie extends JFrame{
 
@@ -20,20 +22,20 @@ public class VistaCrearSerie extends JFrame{
 	private JFrame frmCrearSerie;
 	private Panel Panel_Inferior;
 	
-	TextField textSerie;
-	TextField textCategoria;
-	TextField textAutor;
-	JTextArea areaDescripcion;
-	
-	JButton bAceptar;
-	JButton bCancelar;
-	
+	private TextField textSerie, textAutor;
+	// private TextField textCategoria;
+	private JTextArea areaDescripcion;
+	private JList<Categoria> listCat;
+	private DefaultListModel<Categoria> listModel;
+	private JScrollPane scrollCategoria;
+	private JButton bAceptar, bCancelar;
 	JLabel mensaje;
 
 	public  VistaCrearSerie() {
 		frmCrearSerie = new JFrame();
 		frmCrearSerie.setFont(new Font("Dialog", Font.BOLD, 12));
 		frmCrearSerie.setTitle("Crear Serie");
+		frmCrearSerie.setIconImage(VistaPrincipal.getIconImage());
 		//frmCrearSerie.setBounds(100, 100, 450, 300);
 		frmCrearSerie.setSize(400,400);
 		frmCrearSerie.setLocationRelativeTo(null);
@@ -81,8 +83,14 @@ public class VistaCrearSerie extends JFrame{
 		labelCategoria.setAlignment(Label.CENTER);
 		panel_1.add(labelCategoria, BorderLayout.NORTH);
 		
-		textCategoria = new TextField();
-		panel_1.add(textCategoria, BorderLayout.SOUTH);
+		/*textCategoria = new TextField();
+		panel_1.add(textCategoria, BorderLayout.SOUTH);*/
+		listCat = new JList<Categoria>();
+		listModel = new DefaultListModel<>();
+		listCat.setModel(listModel);
+		scrollCategoria = new JScrollPane(listCat);
+		mostrarCategorias();
+		panel_1.add(scrollCategoria, BorderLayout.SOUTH);
 		
 		Panel panel_2 = new Panel();
 		panel.add(panel_2, BorderLayout.CENTER);
@@ -127,7 +135,7 @@ public class VistaCrearSerie extends JFrame{
 	}
 
 	public String getCategoria() {
-		return textCategoria.getText();
+		return listCat.getSelectedValue().toString();
 	}
 
 	public String getAutor() {
@@ -149,5 +157,11 @@ public class VistaCrearSerie extends JFrame{
 	public void cerrar() {
 		frmCrearSerie.dispose();
 	}
-
+	
+	public void mostrarCategorias() {
+		for(Categoria c : Categoria.listCategorias()) {
+			listModel.addElement(c);
+		}
+	}
+	
 }
