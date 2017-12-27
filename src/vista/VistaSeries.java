@@ -13,8 +13,11 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionListener;
 
+import controlador.CtrListSeries;
 import modelo.Categoria;
 import modelo.Conexion;
 import modelo.Serie;
@@ -22,6 +25,10 @@ import modelo.Viñeta;
 
 public class VistaSeries extends JPanel implements IVistaSeries {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JButton crearCategoria;
 	private JButton borrarCategoria;
 	private JButton crearSerie;
@@ -32,12 +39,11 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 	private JScrollPane scrollCategoria;
 	private JScrollPane scrollSerie;
 	private JScrollPane scrollViñeta;
-	private JScrollPane scrollInformacion;
 	
 	private JList<Categoria> listCategoria;
 	private JList<Serie> listSerie;
 	private JList<Viñeta> listViñeta;
-	private JList listInformacion;
+	private JTextArea infoSerie;
 	
 	private JLabel labelCategoria;
 	private JLabel labelSerie;
@@ -74,6 +80,12 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		modeloListaSeries = new DefaultListModel<Serie>();
 		listSerie.setModel(modeloListaSeries);
 		mostrarSeries();
+		
+		//Se le añade el controlador para la seleccion de una serie
+		CtrListSeries cls = new CtrListSeries(this);
+		setControladorListaSeries(cls);
+		
+		
 		//Montamos la lista de Viñetas
 		listViñeta = new JList<Viñeta>();
 		modeloListaViñetas = new DefaultListModel<Viñeta>();
@@ -81,13 +93,13 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		
 		String[] viñeta = {"Aqui se mostrarían las viñetas de la serie seleccionada"};
 		listViñeta = new JList(viñeta);
-		String[] informacion = {"Aquí se mostraría info de la serie seleccionada"};
-		listInformacion = new JList(informacion);
+		
+		infoSerie = new JTextArea("Información de la serie seleccionada");
 		
 		scrollCategoria = new JScrollPane(listCategoria);
 		scrollSerie = new JScrollPane(listSerie);
 		scrollViñeta = new JScrollPane(listViñeta);
-		scrollInformacion = new JScrollPane(listInformacion);	
+			
 		
 		// Botonera
 		JPanel botonera = new JPanel();
@@ -127,7 +139,7 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		JPanel panelD = new JPanel();
 		panelD.setLayout(new BorderLayout());
 		panelD.add(labelInformacion, BorderLayout.NORTH);
-		panelD.add(scrollInformacion, BorderLayout.CENTER);
+		panelD.add(infoSerie, BorderLayout.CENTER);
 		
 		
 		// Confeccion del panel de contenidos
@@ -202,8 +214,19 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 	public void borrarSerie(Serie s) {
 		modeloListaSeries.removeElement(s);
 	}
+	
 	public void anadirVineta(Viñeta v){
 		modeloListaViñetas.addElement(v);
+	}
+	
+	//Métodos para mostrar info. Se establece el ListSelectionEvent y un método para mostrar la info en esta vista
+	private void setControladorListaSeries(ListSelectionListener ctrLista)
+	{
+		listSerie.addListSelectionListener(ctrLista);
+	}
+	
+	public void muestraInfoSerie(Serie s) {
+		infoSerie.setText(s.getInfo());
 	}
 	
 

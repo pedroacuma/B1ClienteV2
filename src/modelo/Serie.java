@@ -92,4 +92,11 @@ public class Serie {
 		return nombre;
 	}
 	
+	public String getInfo() {
+		return "Nombre: " + this.nombre + "\n"
+				+ "Autor: " + this.autor + "\n"
+				+ "Fecha de creación: " + this.fecha + "\n"
+				+ "Categoria: " + this.categoria + "\n"
+				+ "Descripcion: " + this.descripcion;
+	}
 }
