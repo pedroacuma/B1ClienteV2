@@ -1,7 +1,7 @@
 ----------------------------------------------------------------
-Fri Dec 29 18:29:00 CET 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0160-a351-df6e-00000520bc98 
-on database directory C:\Users\Pedro\Documents\GitHub\Grupo8\Database with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Fri Dec 29 19:03:45 CET 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0160-a371-af82-000004f27d70 
+on database directory C:\Users\Pedro\Documents\GitHub\Grupo8\Database with class loader sun.misc.Launcher$AppClassLoader@2a139a55 
 Loaded from file:/C:/Users/Pedro/Documents/GitHub/Grupo8/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_151-b12
