@@ -21,7 +21,7 @@ import controlador.CtrListSeries;
 import modelo.Categoria;
 import modelo.Conexion;
 import modelo.Serie;
-import modelo.Viñeta;
+import modelo.Vineta;
 
 public class VistaSeries extends JPanel implements IVistaSeries {
 
@@ -42,7 +42,7 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 	
 	private JList<Categoria> listCategoria;
 	private JList<Serie> listSerie;
-	private JList<Viñeta> listViñeta;
+	private JList<Vineta> listViñeta;
 	private JTextArea infoSerie;
 	
 	private JLabel labelCategoria;
@@ -52,7 +52,7 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 	
 	private DefaultListModel <Categoria> modeloListaCats;
 	private DefaultListModel <Serie> modeloListaSeries;
-	private DefaultListModel <Viñeta> modeloListaViñetas;
+	private DefaultListModel <Vineta> modeloListaViñetas;
 	
 	
 	public VistaSeries() {
@@ -87,12 +87,10 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		
 		
 		//Montamos la lista de Viñetas
-		listViñeta = new JList<Viñeta>();
-		modeloListaViñetas = new DefaultListModel<Viñeta>();
+		listViñeta = new JList<Vineta>();
+		modeloListaViñetas = new DefaultListModel<Vineta>();
 		listViñeta.setModel(modeloListaViñetas);
 		
-		String[] viñeta = {"Aqui se mostrarían las viñetas de la serie seleccionada"};
-		listViñeta = new JList(viñeta);
 		
 		infoSerie = new JTextArea("Información de la serie seleccionada");
 		
@@ -207,6 +205,14 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		}
 	}
 	
+	public void mostrarVinetas(Serie s) {
+		List<Vineta> vinetas = s.listVinetas();
+		modeloListaViñetas.removeAllElements();
+		for(Vineta v : vinetas) {
+			modeloListaViñetas.addElement(v);
+		}
+	}
+	
 	public void anadirSerie(Serie s) {
 		modeloListaSeries.addElement(s);
 	}
@@ -215,8 +221,12 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		modeloListaSeries.removeElement(s);
 	}
 	
-	public void anadirVineta(Viñeta v){
+	public void anadirVineta(Vineta v){
 		modeloListaViñetas.addElement(v);
+	}
+	
+	public void borrarVineta(Vineta v) {
+		modeloListaViñetas.removeElement(v);
 	}
 	
 	//Métodos para mostrar info. Se establece el ListSelectionEvent y un método para mostrar la info en esta vista
@@ -227,6 +237,15 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 	
 	public void muestraInfoSerie(Serie s) {
 		infoSerie.setText(s.getInfo());
+	}
+	
+	//Metodo para tomar la vineta seleccionada (a eliminar)
+	public Vineta getSelectedVineta() {
+		Vineta sel = null;
+		if(!listViñeta.getValueIsAdjusting()) {
+			sel = listViñeta.getSelectedValue();
+		}
+		return sel;
 	}
 	
 

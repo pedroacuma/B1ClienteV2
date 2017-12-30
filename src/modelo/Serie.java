@@ -63,6 +63,20 @@ public class Serie {
 		categoria = null;
 		
 	}
+	
+	//Devuelve una lista con las vinetas asociadas a esta serie.
+	public List<Vineta> listVinetas(){
+		Conexion con = new Conexion();
+		List<Object[]> lista = con.Select("SELECT ID FROM VINETA, VINETASERIE WHERE VINETA.ID=idvineta AND IDSERIE=" + id );
+		List<Vineta> vinetas = new ArrayList<>();
+		
+		for(Object[] o : lista) {
+			int idv = (int) o[0];
+			vinetas.add(new Vineta(idv));
+		}
+		
+		return vinetas;
+	}
 
 	public int getId() {
 		return id;

@@ -24,6 +24,8 @@ public class CtrListSeries implements ListSelectionListener{
 			JList<Serie> source = (JList<Serie>) e.getSource();
 	        Serie selected = source.getSelectedValue();
 			vs.muestraInfoSerie(selected);
+			
+			vs.mostrarVinetas(selected);
 		}
 	}
 }

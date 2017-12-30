@@ -7,7 +7,7 @@ import vista.VistaBorrarSerie;
 //import vista.VistaBorrarSerie;
 import vista.VistaCrearCategoria;
 import vista.VistaCrearSerie;
-import vista.VistaCrearViñeta;
+import vista.VistaCrearVineta;
 import vista.VistaPrincipal;
 import vista.VistaSeries;
 
@@ -55,17 +55,29 @@ public class CreadorVentanas {
 		vcs.controlador(ccs);
 	
 	}
-	public static void crearVentanaCV (VistaSeries vs){
-		VistaCrearViñeta vcv = new VistaCrearViñeta();
-		ControladorCrearViñeta ccv = new ControladorCrearViñeta(vcv,vs);
-		vcv.controlador(ccv);
-	}
+
 	
 	public static void crearVentanaBS(VistaSeries vs) {
 		
 		VistaBorrarSerie vbs = new VistaBorrarSerie();
 		ControladorBorrarSerie cbs = new ControladorBorrarSerie(vbs, vs);
 		vbs.controlador(cbs);
+	}
+	
+	public static void crearVentanaCV(VistaSeries vs) {
+		JFrame ventana = new JFrame ("Crear Viñeta");
+		ventana.setIconImage(VistaPrincipal.getIconImage());
+		ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		
+		VistaCrearVineta vcv = new VistaCrearVineta();
+		ControladorCrearVineta ccv = new ControladorCrearVineta(vcv);
+		vcv.controlador(ccv);
+				
+		ventana.setContentPane(vcv);
+		ventana.pack();
+		ventana.setVisible(true);
+		ventana.setSize(600,400);
+		ventana.setLocationRelativeTo(null);
 	}
 
 }
