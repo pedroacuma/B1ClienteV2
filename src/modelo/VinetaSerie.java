@@ -16,6 +16,8 @@ public class VinetaSerie {
 	}
 	
 	public void borrar() {
+		Conexion con = new Conexion();
+		con.Delete("DELTE FROM VINETASERIE WHERE IDVINETA="+ idVineta + " AND IDSERIE=" + idSerie);
 		idVineta = -1;
 		idSerie = -1;
 		anotacionPrivada = null;
