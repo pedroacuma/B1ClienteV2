@@ -76,7 +76,7 @@ public class CreadorVentanas {
 		ventana.setContentPane(vcv);
 		ventana.pack();
 		ventana.setVisible(true);
-		ventana.setSize(600,400);
+		ventana.setSize(1000,600);
 		ventana.setLocationRelativeTo(null);
 	}
 

@@ -8,6 +8,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import modelo.Medio;
 import modelo.Serie;
 
 import java.awt.FlowLayout;
@@ -31,6 +32,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import java.awt.Panel;
+import javax.swing.JScrollBar;
 
 public class VistaCrearVineta extends JPanel {
 	
@@ -58,12 +60,39 @@ public class VistaCrearVineta extends JPanel {
 	private JButton btnAnadir;
 	private Panel panelinferior;
 	private JLabel info;
+	
+	private JPanel panelVineta;
+	
+	/*Publicaciones*/
+	
+	private JPanel panelPublicaciones;
+	
+	//Medio
+	private JPanel panelMedio;
+	private JLabel labelMedio;
+	private JScrollPane scrollMedio;
+	private JList listMedio;
+	private DefaultListModel<Medio> modeloMedio;
+	
+	//Anadir Medio
+	private JPanel panelAnadirMedio;
+	private JLabel labelAnadirMedio;
+	private JTextField textoAnadirMedio;
+	private JButton botonAnadirMedio;
+	
+	//Anadir Fecha
+	private JPanel panelFecha;
+	private JLabel labelFecha;
+	private JTextField textoFecha;
+	private JButton botonFecha;
+	
+	
+	
+	
 
 	public VistaCrearVineta() {
-		
-		
-		
-		setLayout(new BorderLayout());
+
+		setLayout(new GridLayout(1, 2));
 		
 		//Montamos la parte de seleccion de serie/s
 		panelSeries = new JPanel();
@@ -85,7 +114,7 @@ public class VistaCrearVineta extends JPanel {
 		panelSeries.add(labelSeries,BorderLayout.NORTH);
 		panelSeries.add(scrollSeries,BorderLayout.CENTER);
 		
-		add(panelSeries, BorderLayout.CENTER);
+		
 		
 		//Montamos la parte del nombre de la viñeta
 		panelNombre = new JPanel();
@@ -99,7 +128,7 @@ public class VistaCrearVineta extends JPanel {
 		panelNombre.add(labelNombre, BorderLayout.NORTH);
 		panelNombre.add(campoNombre);
 		
-		add(panelNombre,BorderLayout.NORTH);
+		
 		
 		//Montamos la parte de anotacion
 		panelAnotacion = new JPanel();
@@ -113,7 +142,7 @@ public class VistaCrearVineta extends JPanel {
 		panelAnotacion.add(labelAnotacion, BorderLayout.NORTH);
 		panelAnotacion.add(anotacionPublica);
 		
-		add(panelAnotacion,BorderLayout.SOUTH);
+		
 		
 		
 		//En el panel inferior tenemos la botonera e información
@@ -131,12 +160,89 @@ public class VistaCrearVineta extends JPanel {
 		info = new JLabel("Mensaje de Informaci\u00F3n");
 		panelinferior.add(info, BorderLayout.SOUTH);
 		
+		panelVineta = new JPanel();
+		panelVineta.setLayout(new BorderLayout());
+		panelVineta.add(panelSeries, BorderLayout.CENTER);
+		panelVineta.add(panelNombre,BorderLayout.NORTH);
+		panelVineta.add(panelAnotacion,BorderLayout.SOUTH);
+		
+		add(panelVineta);
+		
+		/*PANEL PUBLICACIONES*/
+		
+		panelPublicaciones = new JPanel();
+		panelPublicaciones.setLayout(new BorderLayout());
+		add(panelPublicaciones);
+		
+		//Medio
+		panelMedio = new JPanel();
+		panelMedio.setLayout(new BorderLayout());
+		
+		labelMedio = new JLabel("Seleccione el medio de publicación");
+		labelMedio.setHorizontalAlignment(SwingConstants.CENTER);
+		labelMedio.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		
+		listMedio = new JList<>();
+		listMedio.setFont(new Font("Arial", Font.BOLD, 14));
+		listMedio.setBorder(new MatteBorder(4, 4, 4, 4, (Color) Color.BLUE));
+		modeloMedio = new DefaultListModel<>();
+		listMedio.setModel(modeloMedio);
+		listarMedios(Medio.listMedios());
+		scrollMedio = new JScrollPane(listMedio);
+		
+		panelMedio.add(labelMedio, BorderLayout.NORTH);
+		panelMedio.add(scrollMedio, BorderLayout.CENTER);
+		
+		panelPublicaciones.add(panelMedio, BorderLayout.CENTER);
+		
+		//Anadir Medio
+		panelAnadirMedio = new JPanel();
+		panelAnadirMedio.setLayout(new BorderLayout());
+		
+		labelAnadirMedio = new JLabel("Añadir medio de publicación");
+		labelAnadirMedio.setHorizontalAlignment(SwingConstants.CENTER);
+		labelAnadirMedio.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		textoAnadirMedio = new JTextField ("");
+		botonAnadirMedio = new JButton ("Añadir");
+		
+		panelAnadirMedio.add(labelAnadirMedio, BorderLayout.NORTH);
+		panelAnadirMedio.add(textoAnadirMedio, BorderLayout.CENTER);
+		panelAnadirMedio.add(botonAnadirMedio, BorderLayout.EAST);
+		
+		panelPublicaciones.add(panelAnadirMedio, BorderLayout.NORTH);
+		
+		//Anadir Medio
+		panelFecha = new JPanel();
+		panelFecha.setLayout(new BorderLayout());
+				
+		labelFecha = new JLabel("Introducir fecha de la publicación");
+		labelFecha.setHorizontalAlignment(SwingConstants.CENTER);
+		labelFecha.setFont(new Font("Tahoma", Font.BOLD, 14));
+		
+		textoFecha = new JTextField ("");
+		botonFecha = new JButton ("Aceptar");
+				
+		panelFecha.add(labelFecha, BorderLayout.NORTH);
+		panelFecha.add(textoFecha, BorderLayout.CENTER);
+		panelFecha.add(botonFecha, BorderLayout.SOUTH);
+		
+		panelPublicaciones.add(panelFecha, BorderLayout.SOUTH);
+		
+		
 		
 	}
 	
 	private void listarSeries(List<Serie> lista) {
 		for(Serie s : lista) {
 			modeloLista.addElement(s);
+		}
+	}
+	
+	private void listarMedios(List<Medio> lista) {
+		for(Medio m : lista) {
+			modeloMedio.addElement(m);
 		}
 	}
 	
