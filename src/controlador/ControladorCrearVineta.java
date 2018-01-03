@@ -26,7 +26,7 @@ public class ControladorCrearVineta implements ActionListener{
 			try {
 				String nombre = vcv.getNombreVineta();
 				String anotacionPublica = vcv.getAnotacionPublica();
-				//vineta = new Vineta(nombre,anotacionPublica);
+				vineta = new Vineta(nombre,anotacionPublica);
 				crearVinetaSeries(vcv.getNombreVineta(),vcv.getSerie());
 				vcv.mostrarMensaje("Viñeta creada para todas las series :)");
 			} catch (Exception e1) {
