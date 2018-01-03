@@ -74,7 +74,5 @@ public class Publicacion {
 	public String toString() {
 		return medio+" "+fecha.toString();
 	}
-	
-	
 
 }

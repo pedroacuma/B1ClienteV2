@@ -10,7 +10,7 @@ public class Vineta {
 		
 		this.nombre = nombre;
 		this.anotacionPublica = anotacion;
-		con.Insert("INSERT INTO VINETA (nombre, anotacionPublica, ID_PUBLICACION) VALUES "
+		con.Insert("INSERT INTO VINETA (nombre, anotacionPublica) VALUES "
 				+ "('" + nombre + "','"
 				+ anotacion	+"')");
 		

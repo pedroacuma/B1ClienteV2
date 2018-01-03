@@ -168,6 +168,7 @@ public class VistaCrearVineta extends JPanel {
 		
 		add(panelVineta);
 		
+		
 		/*PANEL PUBLICACIONES*/
 		
 		panelPublicaciones = new JPanel();
