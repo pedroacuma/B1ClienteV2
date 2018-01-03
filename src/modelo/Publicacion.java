@@ -23,7 +23,7 @@ public class Publicacion {
 	
 	public Publicacion (int id_vineta, Date fecha, String medio) {
 		Conexion con = new Conexion();
-		List<Object[]> pub = con.Select("SELECT * FROM PUBLICACION WHERE ID_VINETA = '"+this.id_vineta+"' AND MEDIO = '"+medio+"'");
+		List<Object[]> pub = con.Select("SELECT * FROM PUBLICACION WHERE ID_VINETA = "+this.id_vineta+" AND MEDIO = '"+medio+"'");
 		if (pub.isEmpty()) {
 			con.Insert("INSERT INTO PUBLICACION (ID_VINETA, FECHA, MEDIO) VALUES ("+id_vineta+", '"+fecha+"','"+medio+"')");
 		}

@@ -28,6 +28,10 @@ import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JSeparator;
@@ -42,6 +46,8 @@ public class VistaCrearVineta extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public static final String ANADIR = "ANADIR";
 	public static final String CANCELAR = "CANCELAR";
+	public static final String ANADIRPUBLICACION = "ANADIRPUBLICACION";
+	public static final String ANADIRMEDIO = "ANADIRMEDIO";
 
 	private JPanel panelSeries;
 	private JPanel panelNombre;
@@ -52,7 +58,6 @@ public class VistaCrearVineta extends JPanel {
 	private JList<Serie> listSeries;
 	private JScrollPane scrollSeries;
 
-	
 	private JTextField campoNombre;
 	private JTextField anotacionPublica;
 	
@@ -214,11 +219,11 @@ public class VistaCrearVineta extends JPanel {
 		
 		panelPublicaciones.add(panelAnadirMedio, BorderLayout.NORTH);
 		
-		//Anadir Medio
+		//Anadir Publicacion
 		panelFecha = new JPanel();
 		panelFecha.setLayout(new BorderLayout());
 				
-		labelFecha = new JLabel("Introducir fecha de la publicación");
+		labelFecha = new JLabel("Introducir fecha de la publicación (DD-MM-YYYY HH:MM:SS)");
 		labelFecha.setHorizontalAlignment(SwingConstants.CENTER);
 		labelFecha.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
@@ -235,13 +240,13 @@ public class VistaCrearVineta extends JPanel {
 		
 	}
 	
-	private void listarSeries(List<Serie> lista) {
+	public void listarSeries(List<Serie> lista) {
 		for(Serie s : lista) {
 			modeloLista.addElement(s);
 		}
 	}
 	
-	private void listarMedios(List<Medio> lista) {
+	public void listarMedios(List<Medio> lista) {
 		for(Medio m : lista) {
 			modeloMedio.addElement(m);
 		}
@@ -250,11 +255,37 @@ public class VistaCrearVineta extends JPanel {
 	public void controlador(ActionListener c) {
 		btnAnadir.addActionListener(c);
 		btnAnadir.setActionCommand(ANADIR);	
+		
+		botonAnadirMedio.addActionListener(c);
+		botonAnadirMedio.setActionCommand(ANADIRMEDIO);
+		
+		botonFecha.addActionListener(c);
+		botonFecha.setActionCommand(ANADIRPUBLICACION);
 	}
 	
 	
 	public List<Serie> getSerie(){
 		return listSeries.getSelectedValuesList();
+	}
+	
+	public Medio getMedio() {
+		return (Medio) listMedio.getSelectedValue();
+	}
+	
+	public String getNombreMedio() {
+		return textoAnadirMedio.getText();
+	}
+	
+	public void AnadirUnMedio (Medio m) {
+		this.modeloMedio.addElement(m);
+	}
+	
+	public Date getFecha() throws ParseException {
+		
+		DateFormat format = new SimpleDateFormat ("DD-MM-YYYY HH:MM:SS");
+		java.util.Date parsed = format.parse(textoFecha.getText());
+		java.sql.Date sql = new java.sql.Date (parsed.getTime());
+		return sql;
 	}
 	
 	public String getNombreVineta() {
