@@ -28,6 +28,11 @@ import java.awt.Color;
 import javax.swing.border.EtchedBorder;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.JButton;
 import javax.swing.JSeparator;
@@ -42,7 +47,9 @@ public class VistaCrearVineta extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public static final String ANADIR = "ANADIR";
 	public static final String CANCELAR = "CANCELAR";
-
+	public static final String ANADIRPUBLICACION = "ANADIRPUBLICACION";
+	public static final String ANADIRMEDIO = "ANADIRMEDIO";
+	
 	private JPanel panelSeries;
 	private JPanel panelNombre;
 	private JPanel panelAnotacion;
@@ -214,11 +221,11 @@ public class VistaCrearVineta extends JPanel {
 		
 		panelPublicaciones.add(panelAnadirMedio, BorderLayout.NORTH);
 		
-		//Anadir Medio
+		//Anadir Publicacion
 		panelFecha = new JPanel();
 		panelFecha.setLayout(new BorderLayout());
 				
-		labelFecha = new JLabel("Introducir fecha de la publicación");
+		labelFecha = new JLabel("Introducir fecha de la publicación (YYYY-MM-DD HH:MM:SS)");
 		labelFecha.setHorizontalAlignment(SwingConstants.CENTER);
 		labelFecha.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
@@ -250,6 +257,12 @@ public class VistaCrearVineta extends JPanel {
 	public void controlador(ActionListener c) {
 		btnAnadir.addActionListener(c);
 		btnAnadir.setActionCommand(ANADIR);	
+		
+		botonAnadirMedio.addActionListener(c);
+		botonAnadirMedio.setActionCommand(ANADIRMEDIO);
+		
+		botonFecha.addActionListener(c);
+		botonFecha.setActionCommand(ANADIRPUBLICACION);
 	}
 	
 	
@@ -257,8 +270,28 @@ public class VistaCrearVineta extends JPanel {
 		return listSeries.getSelectedValuesList();
 	}
 	
+	public Medio getMedio() {
+		return (Medio) listMedio.getSelectedValue();
+	}
+	
+	public void AnadirUnMedio (Medio m) {
+		this.modeloMedio.addElement(m);
+	}
+	
 	public String getNombreVineta() {
 		return campoNombre.getText();
+	}
+	
+	public Timestamp getFecha() throws ParseException {
+		
+		SimpleDateFormat format = new SimpleDateFormat ("YYYY-MM-DD HH:MM:SS");
+	    java.util.Date parsedDate = format.parse(textoFecha.getText());
+	    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
+	    return timestamp;
+	}
+	
+	public String getNombreMedio() {
+		return textoAnadirMedio.getText();
 	}
 	
 	public String getAnotacionPublica() {

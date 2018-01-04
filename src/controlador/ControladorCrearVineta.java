@@ -2,6 +2,9 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.List;
 
 import modelo.*;
@@ -15,6 +18,7 @@ public class ControladorCrearVineta implements ActionListener{
 	
 	public ControladorCrearVineta(VistaCrearVineta vcv) {
 		this.vcv = vcv;
+		vineta = null;
 	}
 
 	@Override
@@ -22,7 +26,7 @@ public class ControladorCrearVineta implements ActionListener{
 		String cmd = e.getActionCommand();
 		
 		switch(cmd) {
-			case VistaCrearVineta.ANADIR : 
+		case VistaCrearVineta.ANADIR : 
 			try {
 				String nombre = vcv.getNombreVineta();
 				String anotacionPublica = vcv.getAnotacionPublica();
@@ -33,8 +37,32 @@ public class ControladorCrearVineta implements ActionListener{
 				e1.printStackTrace();
 				vcv.mostrarError("No se ha podido crear");
 			}
-			break;
-		}
+		break;
+		case VistaCrearVineta.ANADIRMEDIO :
+			String nombre = vcv.getNombreMedio();
+			if (nombre.equals("")) {
+				vcv.mostrarError("Debe introducir algún nombre para el medio");
+			}else {
+				Medio m = new Medio (nombre);
+				vcv.AnadirUnMedio(m);
+				vcv.mostrarMensaje("Medio creado con éxito");
+			}	
+		break;
+		case VistaCrearVineta.ANADIRPUBLICACION :
+			try {
+				Timestamp fecha = vcv.getFecha();
+				String medio = vcv.getMedio().getNombre();
+				int idv = vineta.getId();
+				Publicacion p = new Publicacion(idv, fecha, medio);
+				vcv.mostrarMensaje("Publicación añadida con éxito");
+				
+			} catch (ParseException e1) {
+				e1.printStackTrace();
+			}
+		
+		break;
+			
+	}
 	}
 	
 	
