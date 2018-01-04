@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.List;
+
 public class Vineta {
 	private int id;
 	private String nombre;
@@ -48,6 +50,7 @@ public class Vineta {
 	public String getAnotacionPublica() {
 		return anotacionPublica;
 	}
+	
 	
 	public String toString() {
 		return nombre;

@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ListSelectionListener;
 
 import controlador.CtrListSeries;
+import controlador.controladorListaVineta;
 import modelo.Categoria;
 import modelo.Conexion;
 import modelo.Serie;
@@ -54,6 +55,8 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 	private DefaultListModel <Serie> modeloListaSeries;
 	private DefaultListModel <Vineta> modeloListaViñetas;
 	
+	private controladorListaVineta ctrlistavineta;
+	//private ListSelectionListener controladorlistavineta;
 	
 	public VistaSeries() {
 		
@@ -90,6 +93,8 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		listViñeta = new JList<Vineta>();
 		modeloListaViñetas = new DefaultListModel<Vineta>();
 		listViñeta.setModel(modeloListaViñetas);
+		ctrlistavineta = new controladorListaVineta();
+		listViñeta.addListSelectionListener(ctrlistavineta);
 		
 		
 		infoSerie = new JTextArea("Información de la serie seleccionada");
@@ -176,7 +181,7 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		borrarViñeta.setActionCommand(BV);
 		 
 	}
-
+	
 	//Carga categorias en panel categorias
 	public void mostrarCategorias() {
 		for(Categoria c : Categoria.listCategorias()) {

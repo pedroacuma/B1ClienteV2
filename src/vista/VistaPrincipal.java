@@ -36,7 +36,8 @@ public class VistaPrincipal extends JPanel {
         tabbedPane.addTab("Series", panel1);
         tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
         
-        JComponent panel2 = makeTextPanel("Panel #2");
+        VistaPublicaciones vp = new VistaPublicaciones();
+        JComponent panel2 = vp;
         tabbedPane.addTab("Publicaciones", panel2);
         tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
         

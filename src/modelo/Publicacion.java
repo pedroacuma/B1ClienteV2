@@ -1,29 +1,31 @@
 package modelo;
 
-import java.sql.Date;
+import java.util.Date;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Publicacion {
 	
 	private int id;
-	private Date fecha;
+	private Timestamp fecha;
 	private String medio;
 	private int id_vineta;
 	
 	public static List<Publicacion> listPublicacion() {
 		ArrayList<Publicacion> list = new ArrayList<>();
 		Conexion con = new Conexion();
-		for(Object[] tupla : con.Select("SELECT id FROM PUBLICACION")) {
+		for(Object[] tupla : con.Select("SELECT id FROM PUBLICACION ORDER BY fecha DESC")) {
 			int i = (int) tupla[0];
 			list.add(new Publicacion(i));
 		}
 		return list;
 	}
 	
-	public Publicacion (int id_vineta, Date fecha, String medio) {
+	public Publicacion (int id_vineta, Timestamp fecha, String medio) {
 		Conexion con = new Conexion();
-		List<Object[]> pub = con.Select("SELECT * FROM PUBLICACION WHERE ID_VINETA = "+this.id_vineta+" AND MEDIO = '"+medio+"'");
+		List<Object[]> pub = con.Select("SELECT * FROM PUBLICACION WHERE ID_VINETA = '"+this.id_vineta+"' AND MEDIO = '"+medio+"'");
 		if (pub.isEmpty()) {
 			con.Insert("INSERT INTO PUBLICACION (ID_VINETA, FECHA, MEDIO) VALUES ("+id_vineta+", '"+fecha+"','"+medio+"')");
 		}
@@ -38,9 +40,17 @@ public class Publicacion {
 		Object[] tupla = con.Select("SELECT * FROM PUBLICACION WHERE id=" +  id).get(0);
 		
 		this.id = (int) tupla[0];
-		this.fecha = (Date) tupla[1];
-		this.medio = (String) tupla[2];
-		this.id_vineta = (int) tupla[3];
+		this.medio = (String) tupla[1];
+		this.id_vineta = (int) tupla[2];
+
+		//El casting para timestamp es algo complicado
+		try {
+		    this.fecha = (Timestamp) (tupla[3]);
+		} catch(Exception e) { 
+			e.printStackTrace();
+		}
+		
+		
 
 	}
 	
@@ -63,7 +73,7 @@ public class Publicacion {
 		return id_vineta;
 	}
 
-	public Date getFecha() {
+	public Timestamp getFecha() {
 		return fecha;
 	}
 
@@ -71,8 +81,25 @@ public class Publicacion {
 		return medio;
 	}
 	
+	public String getNombreVineta() {
+		Conexion con = new Conexion();
+		return (String)con.Select("SELECT NOMBRE FROM VINETA WHERE ID=" + id_vineta).get(0)[0];
+	}
+	
+	public String getSeries() {
+		Conexion con = new Conexion();
+		List<Object[]> series = con.Select("SELECT SERIE.NOMBRE FROM SERIE, VINETASERIE WHERE IDSERIE=SERIE.ID AND IDVINETA=" + this.id_vineta);
+		String res = "";
+		for(Object[] idSerie : series) {
+			res += " " + idSerie[0];
+		}
+		return res;
+	}
+	
 	public String toString() {
-		return medio+" "+fecha.toString();
+		Conexion con = new Conexion();
+		String nomVin = (String) con.Select("SELECT nombre FROM VINETA WHERE IDVINETA=" + this.id_vineta).get(0)[0];
+		return nomVin + " " + medio+" "+fecha.toString();
 	}
 
 }
