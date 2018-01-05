@@ -284,7 +284,7 @@ public class VistaCrearVineta extends JPanel {
 	
 	public Timestamp getFecha() throws ParseException {
 		
-		SimpleDateFormat format = new SimpleDateFormat ("YYYY-MM-DD HH:MM:SS");
+		SimpleDateFormat format = new SimpleDateFormat ("yyyy-mm-dd hh:mm:ss");
 	    java.util.Date parsedDate = format.parse(textoFecha.getText());
 	    Timestamp timestamp = new java.sql.Timestamp(parsedDate.getTime());
 	    return timestamp;
