@@ -21,9 +21,9 @@ public class VistaPublicaciones extends JPanel {
 	
 	private JTable tablaPendientes;
 	private JTable tablaHistorial;
-	private DefaultTableModel defaultModelPendientes;
-	private DefaultTableModel defaultModelHistorial;
-	private List<Publicacion> pubs;
+	private static DefaultTableModel defaultModelPendientes;
+	private static DefaultTableModel defaultModelHistorial;
+	private static List<Publicacion> pubs;
 	
 	
 	public VistaPublicaciones() {
@@ -42,6 +42,7 @@ public class VistaPublicaciones extends JPanel {
 		panelPendientes.add(labelPendientes, BorderLayout.NORTH);
 		
 		
+		
 		//Creacion de los modelos para tablas
 		defaultModelPendientes = new DefaultTableModel(
 				new Object[][] {
@@ -57,6 +58,9 @@ public class VistaPublicaciones extends JPanel {
 				};
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
+				}
+				public boolean isCellEditable(int filas, int columnas){
+					return false;
 				}
 			};
 			
@@ -74,6 +78,9 @@ public class VistaPublicaciones extends JPanel {
 				};
 				public Class getColumnClass(int columnIndex) {
 					return columnTypes[columnIndex];
+				}
+				public boolean isCellEditable(int filas, int columnas){
+					return false;
 				}
 			};
 			
@@ -121,7 +128,7 @@ public class VistaPublicaciones extends JPanel {
 		cargarDatosTablas();
 	}
 	
-	private void cargarDatosTablas(){
+	public static void cargarDatosTablas(){
 		 pubs = Publicacion.listPublicacion(); //LAS OBTENEMOS EN ORDEN DESCENDENTE
 		 Date hoy = new Date();
 		 for(Publicacion p : pubs) {
@@ -137,8 +144,20 @@ public class VistaPublicaciones extends JPanel {
 			 }
 			 
 		 }
-		 
-		 
+
+	}
+	
+	public static void actualizarTablas(Publicacion p){
+		 String nomVineta = p.getNombreVineta();
+		 String medio = p.getMedio();
+		 String fecha = p.getFecha().toString();
+		 String serie = p.getSeries();
+		 Date hoy = new Date();
+		 if(p.getFecha().after(hoy)) {
+			 defaultModelPendientes.addRow(new Object[] {medio,nomVineta,serie,fecha});
+		 }else {
+			 defaultModelHistorial.addRow(new Object[] {medio,nomVineta,serie,fecha});
+		 }
 	}
 	
 }

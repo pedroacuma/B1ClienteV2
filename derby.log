@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Fri Jan 05 17:59:11 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0160-c743-17ba-000004f26218 
-on database directory C:\Users\Pedro\Documents\GitHub\Grupo8\Database with class loader sun.misc.Launcher$AppClassLoader@2a139a55 
-Loaded from file:/C:/Users/Pedro/Documents/GitHub/Grupo8/derby.jar
+Fri Jan 05 18:39:17 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-0160-c767-cf11-0000030e9ee8 
+on database directory C:\Users\Jairo\Documents\Tercero\Gestión de la Información\JavaWorkspace\Grupo8\Database with class loader sun.misc.Launcher$AppClassLoader@2a139a55 
+Loaded from file:/C:/Users/Jairo/Documents/Tercero/Gesti%c3%b3n%20de%20la%20Informaci%c3%b3n/JavaWorkspace/Grupo8/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_151-b12
-user.dir=C:\Users\Pedro\Documents\GitHub\Grupo8
+java.runtime.version=1.8.0_77-b03
+user.dir=C:\Users\Jairo\Documents\Tercero\Gestión de la Información\JavaWorkspace\Grupo8
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
