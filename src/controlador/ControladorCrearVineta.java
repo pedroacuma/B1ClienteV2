@@ -2,7 +2,6 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.List;
@@ -59,6 +58,7 @@ public class ControladorCrearVineta implements ActionListener{
 					Publicacion p = new Publicacion(idv, fecha, medio);
 					vcv.mostrarMensaje("Publicación añadida con éxito");
 					VistaPublicaciones.actualizarTablas(p);
+					VistaPublicaciones.actualizarAlarmas(p);
 				}else {
 					vcv.mostrarError("Debe crear una viñeta antes de añadir Publicación");
 				}
@@ -77,7 +77,7 @@ public class ControladorCrearVineta implements ActionListener{
 		int idv = vineta.getId();
 		
 		for(Serie s : list) {
-			new VinetaSerie(idv,s.getId(), "");
+			new VinetaSerie(idv,s.getId(),"");
 		}
 	}
 

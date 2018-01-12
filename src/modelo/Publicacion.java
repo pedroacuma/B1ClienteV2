@@ -1,8 +1,6 @@
 package modelo;
 
-import java.util.Date;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,7 +62,7 @@ public class Publicacion {
 		id_vineta = -1;
 		
 	}
-
+	
 	public int getId() {
 		return id;
 	}

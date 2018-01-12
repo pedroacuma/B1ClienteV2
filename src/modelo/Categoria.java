@@ -11,7 +11,7 @@ public class Categoria {
 	public static List<Categoria> listCategorias() {
 		Conexion con = new Conexion();
 		List<Categoria> listCat = new ArrayList<>();
-		List<Object[]> categorias = con.Select("SELECT * FROM categoria");
+		List<Object[]> categorias = con.Select("SELECT * FROM CATEGORIA");
 		
 		for(Object[] o : categorias) {
 			String nomCat = (String) o[0];

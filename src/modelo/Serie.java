@@ -50,7 +50,22 @@ public class Serie {
 		this.categoria = categoria;
 		this.descripcion = descripcion;
 	}
-	
+	//pedro
+//	public void borrarSerie() {
+//		Conexion con = new Conexion();
+//		List<VinetaSerie> vinetas = VinetaSerie.listVinetaSerie(this.id);
+//		for(int i=0;i<vinetas.size();i++){
+//			VinetaSerie v = vinetas.get(i);
+//			v.borrar();
+//		}
+//		con.Delete("DELETE FROM serie WHERE nombre ='" + nombre + "'");
+//		id = -1;
+//		nombre = null;
+//		autor = null;
+//		fecha = null;
+//		descripcion = null;
+//		categoria = null;	
+//	}
 	public void borrarSerie() {
 		Conexion con = new Conexion();
 		System.out.println(this.id);
@@ -61,8 +76,9 @@ public class Serie {
 		fecha = null;
 		descripcion = null;
 		categoria = null;
-		
 	}
+
+	
 	
 	//Devuelve una lista con las vinetas asociadas a esta serie.
 	public List<Vineta> listVinetas(){

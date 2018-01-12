@@ -1,8 +1,6 @@
 package vista;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -14,13 +12,11 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.event.ListSelectionListener;
 
 import controlador.CtrListSeries;
 import controlador.controladorListaVineta;
 import modelo.Categoria;
-import modelo.Conexion;
 import modelo.Serie;
 import modelo.Vineta;
 
@@ -94,7 +90,7 @@ public class VistaSeries extends JPanel implements IVistaSeries {
 		modeloListaViñetas = new DefaultListModel<Vineta>();
 		listViñeta.setModel(modeloListaViñetas);
 		ctrlistavineta = new controladorListaVineta();
-		listViñeta.addListSelectionListener(ctrlistavineta);
+		listViñeta.addMouseListener(ctrlistavineta);
 		
 		
 		infoSerie = new JTextArea("Información de la serie seleccionada");

@@ -129,7 +129,7 @@ public class VistaCrearVineta extends JPanel {
 		JLabel labelNombre = new JLabel("Introduzca el nombre de la imagen(incluyendo extensión)");
 		labelNombre.setHorizontalAlignment(SwingConstants.CENTER);
 		labelNombre.setFont(new Font("Tahoma", Font.BOLD, 14));
-		campoNombre = new JTextField();
+		campoNombre = new JTextField("Fotos/");
 		panelNombre.setLayout(new BorderLayout(0, 0));
 				
 		panelNombre.add(labelNombre, BorderLayout.NORTH);
@@ -139,7 +139,7 @@ public class VistaCrearVineta extends JPanel {
 		
 		//Montamos la parte de anotacion
 		panelAnotacion = new JPanel();
-		JLabel labelAnotacion = new JLabel("Introduzca, si desea, una anotación pública");
+		JLabel labelAnotacion = new JLabel("Introduzca, si desea, una anotación privada");
 		labelAnotacion.setHorizontalAlignment(SwingConstants.CENTER);
 		labelAnotacion.setFont(new Font("Tahoma", Font.BOLD, 14));
 		
